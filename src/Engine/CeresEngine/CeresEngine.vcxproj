@@ -125,8 +125,10 @@
   <ItemGroup>
     <ClInclude Include="Core\DXCore.h" />
     <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="PoolAllocator.hpp" />
     <ClInclude Include="Rendering\SimpleShader.h" />
     <ClInclude Include="Rendering\Vertex.h" />
+    <ClInclude Include="StackAllocator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Rendering\Shader\PixelShader.hlsl">
