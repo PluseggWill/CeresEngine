@@ -2,57 +2,57 @@
 #include <memory>
 
 template <typename T>
-struct StackNode_
+struct StackNode
 {
 	T data;
-	StackNode_* prev;
+	StackNode* prev;
 };
 
 template <class T, class Alloc = std::allocator<T> >
-class StackAlloc
+class StackAllocator
 {
 public:
-	typedef StackNode_<T> Node;
+	typedef StackNode<T> Node;
 	typedef typename Alloc::template rebind<Node>::other allocator;
 
-	StackAlloc() { head_ = 0; }
-	~StackAlloc() { clear(); }
+	StackAllocator() { head = 0; }
+	~StackAllocator() { clear(); }
 
-	bool empty() { return (head_ == 0); }
+	bool empty() { return (head == 0); }
 
 	void clear() {
-		Node* curr = head_;
+		Node* curr = head;
 		while (curr != 0)
 		{
 			Node* tmp = curr->prev;
-			allocator_.destroy(curr);
-			allocator_.deallocate(curr, 1);
+			allocator.destroy(curr);
+			allocator.deallocate(curr, 1);
 			curr = tmp;
 		}
-		head_ = 0;
+		head = 0;
 	}
 
 	void push(T element) {
-		Node* newNode = allocator_.allocate(1);
-		allocator_.construct(newNode, Node());
+		Node* newNode = allocator.allocate(1);
+		allocator.construct(newNode, Node());
 
 		newNode->data = element;
-		newNode->prev = head_;
-		head_ = newNode;
+		newNode->prev = head;
+		head = newNode;
 	}
 
 	T pop() {
-		T result = head_->data;
-		Node* tmp = head_->prev;
-		allocator_.destroy(head_);
-		allocator_.deallocate(head_, 1);
-		head_ = tmp;
+		T result = head->data;
+		Node* tmp = head->prev;
+		allocator.destroy(head);
+		allocator.deallocate(head, 1);
+		head = tmp;
 		return result;
 	}
 
-	T top() { return (head_->data); }
+	T top() { return (head->data); }
 
 private:
-	allocator allocator_;
-	Node* head_;
+	allocator allocator;
+	Node* head;
 };

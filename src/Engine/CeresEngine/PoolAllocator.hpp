@@ -2,7 +2,7 @@
 using namespace std;
 
 template<int ObjectSize, int NumofObjects = 20>
-class MemPool
+class MemoryPool
 {
 private:
 	struct FreeNode
@@ -21,13 +21,13 @@ private:
 	MemBlock* memBlockHeader;
 
 public:
-	MemPool()
+	MemoryPool()
 	{
 		freeNodeHeader = NULL;
 		memBlockHeader = NULL;
 	}
 
-	~MemPool()
+	~MemoryPool()
 	{
 		MemBlock* ptr;
 		while (memBlockHeader)
@@ -42,7 +42,7 @@ public:
 };
 
 template<int ObjectSize, int NumofObjects>
-void* MemPool<ObjectSize, NumofObjects>::malloc()
+void* MemoryPool<ObjectSize, NumofObjects>::malloc()
 {
 	if (freeNodeHeader == NULL)
 	{
@@ -73,7 +73,7 @@ void* MemPool<ObjectSize, NumofObjects>::malloc()
 }
 
 template<int ObjectSize, int NumofObjects>
-void MemPool<ObjectSize, NumofObjects>::free(void* p)
+void MemoryPool<ObjectSize, NumofObjects>::free(void* p)
 {
 	FreeNode* pNode = (FreeNode*)p;
 	pNode->pNext = freeNodeHeader;

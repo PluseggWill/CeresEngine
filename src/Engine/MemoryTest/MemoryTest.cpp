@@ -2,7 +2,7 @@
 using namespace std;
 
 template<int ObjectSize, int NumofObjects = 20>
-class MemPool
+class MemoryPool
 {
 private:
 	//空闲节点结构体
@@ -23,13 +23,13 @@ private:
 	MemBlock* memBlockHeader;
 
 public:
-	MemPool()
+	MemoryPool()
 	{
 		freeNodeHeader = NULL;
 		memBlockHeader = NULL;
 	}
 
-	~MemPool()
+	~MemoryPool()
 	{
 		MemBlock* ptr;
 		while (memBlockHeader)
@@ -45,7 +45,7 @@ public:
 
 //分配空闲的节点
 template<int ObjectSize, int NumofObjects>
-void* MemPool<ObjectSize, NumofObjects>::malloc()
+void* MemoryPool<ObjectSize, NumofObjects>::malloc()
 {
 	//无空闲节点，申请新内存块
 	if (freeNodeHeader == NULL)
@@ -81,7 +81,7 @@ void* MemPool<ObjectSize, NumofObjects>::malloc()
 
 //释放已经分配的节点
 template<int ObjectSize, int NumofObjects>
-void MemPool<ObjectSize, NumofObjects>::free(void* p)
+void MemoryPool<ObjectSize, NumofObjects>::free(void* p)
 {
 	FreeNode* pNode = (FreeNode*)p;
 	pNode->pNext = freeNodeHeader;	//将释放的节点插入空闲节点头部
@@ -110,8 +110,7 @@ public:
 	void operator delete(void* p);
 };
 
-//定义内存池对象
-MemPool<sizeof(ActualClass), 2> mp;
+MemoryPool<sizeof(ActualClass), 2> mp;
 
 void* ActualClass::operator new(size_t size)
 {
