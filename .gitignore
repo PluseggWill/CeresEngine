@@ -33,4 +33,6 @@
 
 # Log File
 *.tlog
+
+# Visual Studio
 *.ipch
