@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-template<int ObjectSize, int NumofObjects = 20>
+template<typename T, int NumofObjects = 20>
 class MemoryPool
 {
 private:
 	struct FreeNode
 	{
 		FreeNode* pNext;
-		char data[ObjectSize];
+		T data;
 	};
 
 	struct MemBlock
@@ -41,8 +41,8 @@ public:
 	void free(void*);
 };
 
-template<int ObjectSize, int NumofObjects>
-void* MemoryPool<ObjectSize, NumofObjects>::malloc()
+template<typename T, int NumofObjects>
+void* MemoryPool<T, NumofObjects>::malloc()
 {
 	if (freeNodeHeader == NULL)
 	{
@@ -72,8 +72,8 @@ void* MemoryPool<ObjectSize, NumofObjects>::malloc()
 	return freeNode;
 }
 
-template<int ObjectSize, int NumofObjects>
-void MemoryPool<ObjectSize, NumofObjects>::free(void* p)
+template<typename T, int NumofObjects>
+void MemoryPool<T, NumofObjects>::free(void* p)
 {
 	FreeNode* pNode = (FreeNode*)p;
 	pNode->pNext = freeNodeHeader;
