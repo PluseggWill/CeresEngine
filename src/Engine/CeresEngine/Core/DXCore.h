@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <d3d11.h>
 #include <string>
+#include <wrl.h>
 
 // We can include the correct library files here
 // instead of in Visual Studio settings if we want
@@ -17,7 +18,9 @@ public:
 		unsigned int windowWidth,	// Width of the window's client area
 		unsigned int windowHeight,	// Height of the window's client area
 		bool debugTitleBarStats);	// Show extra stats (fps) in title bar?
-	~DXCore();
+	DXCore(const DXCore&) = delete;
+	DXCore& operator=(const DXCore&) = delete;
+	~DXCore() = default;
 
 	// Static requirements for OS-level message processing
 	static DXCore* DXCoreInstance;
@@ -62,12 +65,19 @@ protected:
 	
 	// DirectX related objects and variables
 	D3D_FEATURE_LEVEL		dxFeatureLevel;
-	IDXGISwapChain*			swapChain;
+	Microsoft::WRL::ComPtr<IDXGISwapChain>			swapChain;
+	Microsoft::WRL::ComPtr <ID3D11Device>			device;
+	Microsoft::WRL::ComPtr <ID3D11DeviceContext>	context;
+
+	Microsoft::WRL::ComPtr <ID3D11RenderTargetView> backBufferRTV;
+	Microsoft::WRL::ComPtr <ID3D11DepthStencilView> depthStencilView;
+
+	/*IDXGISwapChain*			swapChain;
 	ID3D11Device*			device;
 	ID3D11DeviceContext*	context;
 
 	ID3D11RenderTargetView* backBufferRTV;
-	ID3D11DepthStencilView* depthStencilView;
+	ID3D11DepthStencilView* depthStencilView;*/
 
 	// Helper function for allocating a console window
 	void CreateConsoleWindow(int bufferLines, int bufferColumns, int windowLines, int windowColumns);

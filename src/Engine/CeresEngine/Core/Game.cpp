@@ -79,10 +79,10 @@ void Game::Init()
 // --------------------------------------------------------
 void Game::LoadShaders()
 {
-	vertexShader = new SimpleVertexShader(device, context);
+	vertexShader = new SimpleVertexShader(device.Get(), context.Get());
 	vertexShader->LoadShaderFile(L"VertexShader.cso");
 
-	pixelShader = new SimplePixelShader(device, context);
+	pixelShader = new SimplePixelShader(device.Get(), context.Get());
 	pixelShader->LoadShaderFile(L"PixelShader.cso");
 }
 
@@ -243,9 +243,9 @@ void Game::Draw(float deltaTime, float totalTime)
 	// Clear the render target and depth buffer (erases what's on the screen)
 	//  - Do this ONCE PER FRAME
 	//  - At the beginning of Draw (before drawing *anything*)
-	context->ClearRenderTargetView(backBufferRTV, color);
+	context->ClearRenderTargetView(backBufferRTV.Get(), color);
 	context->ClearDepthStencilView(
-		depthStencilView,
+		depthStencilView.Get(),
 		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
 		1.0f,
 		0);

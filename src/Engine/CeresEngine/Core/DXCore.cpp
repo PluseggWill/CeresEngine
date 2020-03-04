@@ -1,10 +1,11 @@
-#include "DXCore.h"
+﻿#include "DXCore.h"
 
 #include <WindowsX.h>
 #include <sstream>
 
 // Define the static instance variable so our OS-level 
 // message handling function below can talk to our object
+// ？？？ 
 DXCore* DXCore::DXCoreInstance = 0;
 
 // --------------------------------------------------------
@@ -51,11 +52,11 @@ DXCore::DXCore(
 	fpsFrameCount = 0;
 	fpsTimeElapsed = 0.0f;
 	
-	device = 0;
-	context = 0;
-	swapChain = 0;
-	backBufferRTV = 0;
-	depthStencilView = 0;
+	device = nullptr;
+	context = nullptr;
+	swapChain = nullptr;
+	backBufferRTV = nullptr;
+	depthStencilView = nullptr;  // ???
 
 	// Query performance counter for accurate timing information
 	__int64 perfFreq;
@@ -65,17 +66,18 @@ DXCore::DXCore(
 
 // --------------------------------------------------------
 // Destructor - Clean up (release) all DirectX references
+// Now using the smart ptr, so we only need to use default destructor
 // --------------------------------------------------------
-DXCore::~DXCore()
-{
-	// Release all DirectX resources
-	if (depthStencilView) { depthStencilView->Release(); }
-	if (backBufferRTV) { backBufferRTV->Release();}
-
-	if (swapChain) { swapChain->Release();}
-	if (context) { context->Release();}
-	if (device) { device->Release();}
-}
+//DXCore::~DXCore()
+//{
+//	// Release all DirectX resources
+//	if (depthStencilView) { depthStencilView->Release(); }
+//	if (backBufferRTV) { backBufferRTV->Release();}
+//
+//	if (swapChain) { swapChain->Release();}
+//	if (context) { context->Release();}
+//	if (device) { device->Release();}
+//}
 
 // --------------------------------------------------------
 // Created the actual window for our application
@@ -251,7 +253,7 @@ HRESULT DXCore::InitDirectX()
 
 	// Bind the views to the pipeline, so rendering properly 
 	// uses their underlying textures
-	context->OMSetRenderTargets(1, &backBufferRTV, depthStencilView);
+	context->OMSetRenderTargets(1, &backBufferRTV, depthStencilView.Get());
 
 	// Lastly, set up a viewport so we render into
 	// to correct portion of the window
@@ -320,7 +322,7 @@ void DXCore::OnResize()
 
 	// Bind the views to the pipeline, so rendering properly 
 	// uses their underlying textures
-	context->OMSetRenderTargets(1, &backBufferRTV, depthStencilView);
+	context->OMSetRenderTargets(1, &backBufferRTV, depthStencilView.Get());
 
 	// Lastly, set up a viewport so we render into
 	// to correct portion of the window
@@ -502,10 +504,6 @@ void DXCore::CreateConsoleWindow(int bufferLines, int bufferColumns, int windowL
 	HMENU hmenu = GetSystemMenu(consoleHandle, FALSE);
 	EnableMenuItem(hmenu, SC_CLOSE, MF_GRAYED);
 }
-
-
-
-
 
 // --------------------------------------------------------
 // Handles messages that are sent to our window by the
