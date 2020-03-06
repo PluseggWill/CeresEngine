@@ -30,13 +30,7 @@
     <ClInclude Include="Core\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix3.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CERES_DLL.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
@@ -46,6 +40,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="EngineLoop.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
