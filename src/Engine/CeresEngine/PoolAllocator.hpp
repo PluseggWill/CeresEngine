@@ -1,35 +1,35 @@
-#include <iostream>
 using namespace std;
+#include <iostream>
 
 template<typename T, int NumofObjects = 20>
-class MemoryPool
+class PoolAllocator
 {
 private:
-	struct FreeNode
+	struct Node
 	{
-		FreeNode* pNext;
-		T data;
+		Node* pNext;
+		T object;
 	};
 
-	struct MemBlock
+	struct Block
 	{
-		MemBlock* pNext;
-		FreeNode data[NumofObjects];
+		Block* pNext;
+		Node data[NumofObjects];
 	};
 
-	FreeNode* freeNodeHeader;
-	MemBlock* memBlockHeader;
+	Node* freeNodeHeader;
+	Block* memBlockHeader;
 
 public:
-	MemoryPool()
+	PoolAllocator()
 	{
 		freeNodeHeader = NULL;
 		memBlockHeader = NULL;
 	}
 
-	~MemoryPool()
+	~PoolAllocator()
 	{
-		MemBlock* ptr;
+		Block* ptr;
 		while (memBlockHeader)
 		{
 			ptr = memBlockHeader->pNext;
@@ -42,15 +42,14 @@ public:
 };
 
 template<typename T, int NumofObjects>
-void* MemoryPool<T, NumofObjects>::malloc()
+void* PoolAllocator<T, NumofObjects>::malloc()
 {
 	if (freeNodeHeader == NULL)
 	{
-		MemBlock* newBlock = new MemBlock;
+		Block* newBlock = new Block;
 		newBlock->pNext = NULL;
 
 		freeNodeHeader = &newBlock->data[0];
-
 		for (int i = 1; i < NumofObjects; ++i)
 		{
 			newBlock->data[i - 1].pNext = &newBlock->data[i];
@@ -73,9 +72,9 @@ void* MemoryPool<T, NumofObjects>::malloc()
 }
 
 template<typename T, int NumofObjects>
-void MemoryPool<T, NumofObjects>::free(void* p)
+void PoolAllocator<T, NumofObjects>::free(void* p)
 {
-	FreeNode* pNode = (FreeNode*)p;
+	Node* pNode = (Node*)p;
 	pNode->pNext = freeNodeHeader;
 	freeNodeHeader = pNode;
 }

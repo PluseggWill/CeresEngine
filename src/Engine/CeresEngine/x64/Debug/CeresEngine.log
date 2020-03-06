@@ -1,2 +1,8 @@
-﻿  compilation object save succeeded; see Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\x64\Debug\PixelShader.cso
-  CeresEngine.vcxproj -> Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe
+﻿  compilation object save succeeded; see I:\Documents\CeresEngine\src\Engine\x64\Debug\PixelShader.cso
+  compilation object save succeeded; see I:\Documents\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
+  DXCore.cpp
+  Game.cpp
+  Main.cpp
+  SimpleShader.cpp
+  Generating Code...
+  CeresEngine.vcxproj -> I:\Documents\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe

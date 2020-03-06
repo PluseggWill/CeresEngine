@@ -1,19 +1,2 @@
 ﻿  MemoryTest.cpp
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(17,17): error C2065: 'NumofObjects': undeclared identifier
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(16): message : see reference to class template instantiation 'MemoryPool<T>::MemBlock' being compiled
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(42): message : see reference to class template instantiation 'MemoryPool<T>' being compiled
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(54,23): error C3861: 'NumofObjects': identifier not found
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(58,18): error C3861: 'NumofObjects': identifier not found
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(83,12): error C2065: 'ActualClass': undeclared identifier
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(83,1): error C2923: 'MemoryPool': 'ActualClass' is not a valid template type argument for parameter 'T'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(83,27): error C2133: 'mp': unknown size
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(83,25): error C2512: 'MemoryPool': no appropriate default constructor available
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(6,1): message : see declaration of 'MemoryPool'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(101,19): error C2662: 'void *MemoryPool<T>::malloc(void)': cannot convert 'this' pointer from 'MemoryPool' to 'MemoryPool<T> &'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(101,19): message : Reason: cannot convert from 'MemoryPool' to 'MemoryPool<T>'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(101,9): message : Conversion requires a second user-defined-conversion operator or constructor
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(40,8): message : see declaration of 'MemoryPool<T>::malloc'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(106,11): error C2662: 'void MemoryPool<T>::free(void *)': cannot convert 'this' pointer from 'MemoryPool' to 'MemoryPool<T> &'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(106,11): message : Reason: cannot convert from 'MemoryPool' to 'MemoryPool<T>'
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(106,2): message : Conversion requires a second user-defined-conversion operator or constructor
-Z:\IGMProfile\Documents\GitHub\CeresEngine\src\Engine\MemoryTest\MemoryTest.cpp(41,7): message : see declaration of 'MemoryPool<T>::free'
+  MemoryTest.vcxproj -> I:\Documents\CeresEngine\src\Engine\x64\Debug\MemoryTest.exe
