@@ -123,10 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="CERES_DLL.h" />
     <ClInclude Include="Core\DXCore.h" />
     <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="EngineLoop.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Rendering\SimpleShader.h" />
     <ClInclude Include="Rendering\Vertex.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Rendering\Shader\PixelShader.hlsl">
@@ -143,10 +149,13 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\DXCore.cpp" />
     <ClCompile Include="Core\Game.cpp" />
+    <ClCompile Include="EngineLoop.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Rendering\SimpleShader.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
