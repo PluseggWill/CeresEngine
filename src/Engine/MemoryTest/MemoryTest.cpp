@@ -84,7 +84,7 @@ void PoolAllocator<T, NumofObjects>::free(void* p)
 
 int mcount = 0;
 
-class ActualClass
+class TestClass
 {
 
 public:
@@ -105,19 +105,19 @@ public:
 };
 
 
-PoolAllocator<ActualClass, 50> mp;
+PoolAllocator<TestClass, 50> mp;
 
-void* ActualClass::operator new(size_t size)
+void* TestClass::operator new(size_t size)
 {
 	return mp.malloc();
 }
 
-void ActualClass::operator delete(void* p)
+void TestClass::operator delete(void* p)
 {
 	mp.free(p);
 }
 
-class ActualClass2
+class TestClass2
 {
 
 public:
@@ -133,10 +133,10 @@ int main()
 	clock_t startTime, endTime;
 	startTime = clock();
 	for (int i = 0; i < 100000; i++) {
-		ActualClass* p[100];
+		TestClass* p[100];
 		for (int j = 0; j < 100; j++) {
 
-			p[j] = new ActualClass;
+			p[j] = new TestClass;
 		}
 		for (int j = 0; j < 100; j++) {
 
@@ -144,21 +144,21 @@ int main()
 		}
 	}
 
-	/*ActualClass* p2 = new ActualClass;
+	/*TestClass* p2 = new TestClass;
 	p2->print();
 
 
-	ActualClass* p3 = new ActualClass;
+	TestClass* p3 = new TestClass;
 	p3->print();
 
 	delete p2;
 	delete p3;
 
-	ActualClass* p4 = new ActualClass;
+	TestClass* p4 = new TestClass;
 	p4->print();
 
 
-	ActualClass* p5 = new ActualClass;
+	TestClass* p5 = new TestClass;
 	p5->print();
 
 	delete p4;
@@ -169,10 +169,10 @@ int main()
 
 	startTime = clock();
 	for (int i = 0; i < 100000; i++) {
-		ActualClass2* p[100];
+		TestClass2* p[100];
 		for (int j = 0; j < 100; j++) {
 
-			p[j] = new ActualClass2;
+			p[j] = new TestClass2;
 		}
 		for (int j = 0; j < 100; j++) {
 
