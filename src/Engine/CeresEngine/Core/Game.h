@@ -30,6 +30,8 @@ private:
 	void LoadShaders(); 
 	void CreateMatrices();
 	void CreateBasicGeometry();
+	void CreateTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float x5, float y5, float x6, float y6, float x7, float y7, float x8, float y8);
+	void CreateRectangle(float x, float y, float sizeX, float sizeY);
 
 	// Buffers to hold actual geometry data
 	ID3D11Buffer* vertexBuffer;

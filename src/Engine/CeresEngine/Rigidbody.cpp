@@ -1,4 +1,8 @@
 #include "Rigidbody.h"
+#include "PhysicsGeneralMethods.h"
+#include <stdio.h>
+
+using namespace Physics;
 
 void Rigidbody::AddForce(XMVECTOR force)
 {
@@ -8,4 +12,23 @@ void Rigidbody::AddForce(XMVECTOR force)
 void Rigidbody::AddAngularForce(XMVECTOR force)
 {
 	angularVelocity = XMVectorAdd(angularVelocity, XMVectorScale(force, 1 / mass));
+}
+
+void Rigidbody::AddForceAtPoint(XMVECTOR force, XMVECTOR point)
+{
+	//force /= 1000;
+	XMVECTOR n = center - point;
+	float powl = XMVectorGetX(n) * XMVectorGetX(n) + XMVectorGetY(n) * XMVectorGetY(n);
+	XMVECTOR vforce = force * n * n / powl;
+	XMVECTOR aforce = force - vforce;
+	float afl = sqrtf(XMVectorGetX(aforce) * XMVectorGetX(aforce) + XMVectorGetY(aforce) * XMVectorGetY(aforce))/5;
+	if (IsThreePointUnclockwise(XMVectorGetX(center), XMVectorGetY(center), XMVectorGetX(point), XMVectorGetY(point), XMVectorGetX(point) + XMVectorGetX(aforce), XMVectorGetY(point) + XMVectorGetY(aforce))) {
+		AddAngularForce(XMVectorSet(0, 0, -afl, 0));
+	}
+	else {
+		AddAngularForce(XMVectorSet(0, 0, +afl, 0));
+	}
+	//printf("%f,%f\n", XMVectorGetX(aforce), XMVectorGetY(aforce));
+	//AddForce(vforce);
+	AddAngularForce(aforce);
 }

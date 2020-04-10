@@ -1,3 +1,5 @@
-﻿  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\PixelShader.cso
-  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
-  CeresEngine.vcxproj -> D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe
+﻿  Game.cpp
+I:\Documents\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(398,72): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(471,168): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(472,171): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+  CeresEngine.vcxproj -> I:\Documents\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe
