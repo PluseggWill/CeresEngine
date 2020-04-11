@@ -1,3 +1,2 @@
-﻿  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\PixelShader.cso
-  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
-  CeresEngine.vcxproj -> D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe
+﻿  Light.cpp
+LINK : fatal error LNK1104: cannot open file 'd3dll.lib'
