@@ -91,7 +91,9 @@ void Game::Init()
 	cc->SetCenter(1.51f, 0); 
 	cc2->SetCenter(2.1f, 0);
 	rb->mass = 1;
+	rb->isLockRotation = true;
 	rb2->mass = 3;
+	rb2->isLockPosition = true;
 	rb2->AddAngularForce(XMVectorSet(0, 0, 40, 0));
 	//bc2->SetRotateMatrix(XMMatrixMultiply(bc2->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, 45 * M_PI / 180))));
 	
@@ -377,10 +379,13 @@ void Game::Update(float deltaTime, float totalTime)
 		rb->velocity = XMVectorSetX(rb->velocity, 0);
 	}
 
-	bc->SetCenter(bc->GetCenter() + rb->velocity * deltaTime);
+	/*bc->SetCenter(bc->GetCenter() + rb->velocity * deltaTime);
 	rb->center = bc->GetCenter();
 	bc2->SetCenter(bc2->GetCenter() + rb2->velocity * deltaTime);
-	rb2->center = bc2->GetCenter();
+	rb2->center = bc2->GetCenter();*/
+
+	rb->Update(deltaTime, bc);
+	rb2->Update(deltaTime, bc2);
 
 	XMVECTOR point;
 	bool isOverlapping = IsOverlapping(*bc, *bc2, point);
@@ -394,13 +399,13 @@ void Game::Update(float deltaTime, float totalTime)
 		printf("\nOnCollisionExit\n");
 	}
 	if (isOverlapping) {
-		HandleCollisionForRigidbody(rb, bc, bc2, point);
-		float f = rb2->mass * powf(XMVectorGetZ(rb2->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(point), XMVectorGetY(point), XMVectorGetX(bc2->GetCenter()), XMVectorGetY(bc2->GetCenter())));
+		HandleCollisionForRigidbody(rb, rb2, bc, bc2, point);
+		/*float f = rb2->mass * powf(XMVectorGetZ(rb2->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(point), XMVectorGetY(point), XMVectorGetX(bc2->GetCenter()), XMVectorGetY(bc2->GetCenter())));
 		XMVECTOR force = XMVector2Normalize(bc->GetCenter() - point) * f;
 		
 		force = XMVectorSetZ(force, 0);
 		printf("force: %f, %f, %f ,%f\n",f, XMVectorGetX(force), XMVectorGetY(force), XMVectorGetZ(force));
-		rb2->AddForceAtPoint(rb->velocity - force,point);
+		rb2->AddForceAtPoint(rb->velocity - force,point);*/
 		//rb->AddForceAtPoint(rb2->velocity, point);
 		//rb->AddForceAtPoint(rb2->velocity, point);
 	}
@@ -468,8 +473,8 @@ void Game::Draw(float deltaTime, float totalTime)
 	points2[3] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) - XMVectorGetX(bc2->GetSize()) / 2, XMVectorGetY(bc2->GetCenter()) + XMVectorGetY(bc2->GetSize()) / 2, 0, 0);
 
 
-	bc->SetRotateMatrix(XMMatrixMultiply(bc->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(rb->angularVelocity) * M_PI / 180))));
-	bc2->SetRotateMatrix(XMMatrixMultiply(bc2->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(rb2->angularVelocity) * M_PI / 180))));
+	/*bc->SetRotateMatrix(XMMatrixMultiply(bc->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(rb->angularVelocity) * M_PI / 180))));
+	bc2->SetRotateMatrix(XMMatrixMultiply(bc2->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(rb2->angularVelocity) * M_PI / 180))));*/
 
 	for (int i = 0; i < 4; i++) {
 		points1[i] -= bc->GetCenter();

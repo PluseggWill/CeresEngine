@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include "PhysicsGeneralMethods.h"
+#define M_PI 3.14159265358979323846
 
 
 bool Physics::IsOverlapping(BoxCollider c1, BoxCollider c2)
@@ -1015,7 +1016,7 @@ bool Physics::LinecastCollider(Line line, CircleCollider targetCollider, HitInfo
 	
 }
 
-void Physics::HandleCollisionForRigidbody(Rigidbody *rb, BoxCollider *thisCollider, BoxCollider *targetCollider, XMVECTOR hitpoint)
+void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, BoxCollider *thisCollider, BoxCollider *targetCollider, XMVECTOR hitpoint)
 {
 	XMVECTOR or1 = thisCollider->GetOffset();
 	or1 = XMVector2Transform(or1, thisCollider->GetRotateMatrix());
@@ -1046,12 +1047,33 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, BoxCollider *thisCollid
 	//}
 	//printf("delta: %f,%f\n", XMVectorGetX(hitpoint), XMVectorGetY(hitpoint));
 	//printf("delta: %f,%f\n", XMVectorGetX(ray.point), XMVectorGetY(ray.point));
-	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	if (!rb->isStatic && !rb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	}
+	if (!targetRb->isStatic && !targetRb->isLockPosition) {
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if ((rb->isStatic || rb->isLockPosition) && (targetRb->isStatic || targetRb->isLockPosition)) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isStatic || targetRb->isStatic) {
+		return;
+	}
 	//printf("hit1: %f,%f\n", XMVectorGetX(hit1.hitPoint), XMVectorGetY(hit1.hitPoint));
 	//printf("hit2: %f,%f\n", XMVectorGetX(hit2.hitPoint), XMVectorGetY(hit2.hitPoint));
+	float f = targetRb->mass * powf(XMVectorGetZ(targetRb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(targetCollider->GetCenter()), XMVectorGetY(targetCollider->GetCenter())));
+	XMVECTOR force = XMVector2Normalize(thisCollider->GetCenter() - hitpoint) * f;
+	float f2 = rb->mass * powf(XMVectorGetZ(rb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(thisCollider->GetCenter()), XMVectorGetY(thisCollider->GetCenter())));
+	XMVECTOR force2 = XMVector2Normalize(targetCollider->GetCenter() - hitpoint) * f;
+	force = XMVectorSetZ(force, 0);
+	force2 = XMVectorSetZ(force2, 0);
+	//printf("force: %f, %f, %f ,%f\n", f, XMVectorGetX(force), XMVectorGetY(force), XMVectorGetZ(force));
+	targetRb->AddForceAtPoint(rb->velocity - force, hitpoint);
+	rb->AddForceAtPoint(targetRb->velocity - force, hitpoint);
 }
 
-void Physics::HandleCollisionForRigidbody(Rigidbody *rb, CircleCollider *thisCollider, BoxCollider *targetCollider, XMVECTOR hitpoint)
+void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, CircleCollider *thisCollider, BoxCollider *targetCollider, XMVECTOR hitpoint)
 {
 	XMVECTOR or1 = thisCollider->GetOffset();
 	or1 = XMVector2Transform(or1, thisCollider->GetRotateMatrix());
@@ -1069,7 +1091,7 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, CircleCollider *thisCol
 	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
 }
 
-void Physics::HandleCollisionForRigidbody(Rigidbody *rb, BoxCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
+void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, BoxCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
 {
 	XMVECTOR or1 = thisCollider->GetOffset();
 	or1 = XMVector2Transform(or1, thisCollider->GetRotateMatrix());
@@ -1087,7 +1109,7 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, BoxCollider *thisCollid
 	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
 }
 
-void Physics::HandleCollisionForRigidbody(Rigidbody *rb, CircleCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
+void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, CircleCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
 {
 	XMVECTOR or1 = thisCollider->GetOffset();
 	or1 = XMVector2Transform(or1, thisCollider->GetRotateMatrix());

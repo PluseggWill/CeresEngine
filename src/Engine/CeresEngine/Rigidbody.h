@@ -3,6 +3,7 @@
 
 #include <DirectXMath.h>
 #include "GameComponent.h"
+#include "Collider.h"
 
 using namespace DirectX;
 
@@ -13,10 +14,14 @@ public:
 	XMVECTOR angularVelocity;
 	float mass;
 	float bounciness;
-	bool usingGravity;
+	bool isStatic;
+	bool isLockPosition;
+	bool isLockRotation;
 
 	void AddForce(XMVECTOR force);
 	void AddAngularForce(XMVECTOR force);
 	void AddForceAtPoint(XMVECTOR force, XMVECTOR point);
+
+	void Update(float deltaTime, Collider* collider);
 
 };

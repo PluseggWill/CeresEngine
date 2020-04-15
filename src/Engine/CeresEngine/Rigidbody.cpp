@@ -1,6 +1,7 @@
 #include "Rigidbody.h"
 #include "PhysicsGeneralMethods.h"
 #include <stdio.h>
+#define M_PI 3.14159265358979323846
 
 using namespace Physics;
 
@@ -31,4 +32,18 @@ void Rigidbody::AddForceAtPoint(XMVECTOR force, XMVECTOR point)
 	//printf("%f,%f\n", XMVectorGetX(aforce), XMVectorGetY(aforce));
 	//AddForce(vforce);
 	AddAngularForce(aforce);
+}
+
+void Rigidbody::Update(float deltaTime, Collider* collider)
+{
+	if (isStatic) {
+		return;
+	}
+	if (!isLockPosition) {
+		collider->SetCenter(collider->GetCenter() + velocity * deltaTime);
+		center = collider->GetCenter();
+	}
+	if (!isLockRotation) {
+		collider->SetRotateMatrix(XMMatrixMultiply(collider->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(angularVelocity) * M_PI / 180))));
+	}
 }

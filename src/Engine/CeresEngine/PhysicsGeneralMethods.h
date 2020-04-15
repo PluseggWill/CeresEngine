@@ -38,8 +38,8 @@ namespace Physics {
 	bool LinecastCollider(Line line, BoxCollider targetCollider, HitInfo& result);
 	bool LinecastCollider(Line line, CircleCollider targetCollider, HitInfo& result);
 	
-	void HandleCollisionForRigidbody(Rigidbody* rb, BoxCollider* thisCollider, BoxCollider* targetCollider, XMVECTOR hitpoint);
-	void HandleCollisionForRigidbody(Rigidbody* rb, CircleCollider* thisCollider, BoxCollider* targetCollider, XMVECTOR hitpoint);
-	void HandleCollisionForRigidbody(Rigidbody* rb, BoxCollider* thisCollider, CircleCollider* targetCollider, XMVECTOR hitpoint);
-	void HandleCollisionForRigidbody(Rigidbody* rb, CircleCollider* thisCollider, CircleCollider* targetCollider, XMVECTOR hitpoint);
+	void HandleCollisionForRigidbody(Rigidbody* rb, Rigidbody* targetRb, BoxCollider* thisCollider, BoxCollider* targetCollider, XMVECTOR hitpoint);
+	void HandleCollisionForRigidbody(Rigidbody* rb, Rigidbody* targetRb, CircleCollider* thisCollider, BoxCollider* targetCollider, XMVECTOR hitpoint);
+	void HandleCollisionForRigidbody(Rigidbody* rb, Rigidbody* targetRb, BoxCollider* thisCollider, CircleCollider* targetCollider, XMVECTOR hitpoint);
+	void HandleCollisionForRigidbody(Rigidbody* rb, Rigidbody* targetRb, CircleCollider* thisCollider, CircleCollider* targetCollider, XMVECTOR hitpoint);
 }
