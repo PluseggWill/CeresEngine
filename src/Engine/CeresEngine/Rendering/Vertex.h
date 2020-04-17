@@ -29,8 +29,8 @@ struct Vertex
 	XMFLOAT3 Position;	    // The position of the vertex
 	//XMFLOAT4 Color;        // The color of the vertex
 	XMFLOAT3 Normal;		// The normal of the vertex
-	XMFLOAT2 TexC;			// The texture of the vertex
 	XMFLOAT3 TangentU;		// The Tangent vector of the vertex
+	XMFLOAT2 TexC;			// The texture of the vertex
 };
 
 struct MeshData

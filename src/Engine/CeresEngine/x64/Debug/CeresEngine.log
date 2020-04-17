@@ -1,2 +1,6 @@
-﻿  Light.cpp
-LINK : fatal error LNK1104: cannot open file 'd3dll.lib'
+﻿  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
+  Game.cpp
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(157,11): warning C4101:  'temp': unreferenced local variable
+Main.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Main.obj' or at 'D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\vc142.pdb'; linking object as if no debug info
+DXCore.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'DXCore.obj' or at 'D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\vc142.pdb'; linking object as if no debug info
+  CeresEngine.vcxproj -> D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe

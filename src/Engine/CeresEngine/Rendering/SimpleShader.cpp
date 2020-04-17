@@ -688,7 +688,7 @@ bool SimpleVertexShader::CreateShader(ID3DBlob* shaderBlob)
 		elementDesc.SemanticName = paramDesc.SemanticName;
 		elementDesc.SemanticIndex = paramDesc.SemanticIndex;
 		elementDesc.InputSlot = 0;
-		elementDesc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+		elementDesc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;  // Define the current element directly after the previous one.
 		elementDesc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 		elementDesc.InstanceDataStepRate = 0;
 
