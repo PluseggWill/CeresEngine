@@ -1053,7 +1053,7 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, Bo
 	if (!targetRb->isStatic && !targetRb->isLockPosition) {
 		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
 	}
-	if ((rb->isStatic || rb->isLockPosition) && (targetRb->isStatic || targetRb->isLockPosition)) {
+	if (rb->isLockPosition && targetRb->isLockPosition) {
 		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
 		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
 	}
@@ -1087,8 +1087,30 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, Ci
 	if (!t1) {
 		hit1.hitPoint = hitpoint;
 	}
+
+
 	XMVECTOR delta = hit1.hitPoint - hitpoint;
-	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	if (!rb->isStatic && !rb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	}
+	if (!targetRb->isStatic && !targetRb->isLockPosition) {
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isLockPosition && targetRb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isStatic || targetRb->isStatic) {
+		return;
+	}
+	float f = targetRb->mass * powf(XMVectorGetZ(targetRb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(targetCollider->GetCenter()), XMVectorGetY(targetCollider->GetCenter())));
+	XMVECTOR force = XMVector2Normalize(thisCollider->GetCenter() - hitpoint) * f;
+	float f2 = rb->mass * powf(XMVectorGetZ(rb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(thisCollider->GetCenter()), XMVectorGetY(thisCollider->GetCenter())));
+	XMVECTOR force2 = XMVector2Normalize(targetCollider->GetCenter() - hitpoint) * f;
+	force = XMVectorSetZ(force, 0);
+	force2 = XMVectorSetZ(force2, 0);
+	targetRb->AddForceAtPoint(rb->velocity - force, hitpoint);
+	rb->AddForceAtPoint(targetRb->velocity - force, hitpoint);
 }
 
 void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, BoxCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
@@ -1106,7 +1128,27 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, Bo
 		hit1.hitPoint = hitpoint;
 	}
 	XMVECTOR delta = hit1.hitPoint - hitpoint;
-	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	if (!rb->isStatic && !rb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	}
+	if (!targetRb->isStatic && !targetRb->isLockPosition) {
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isLockPosition && targetRb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isStatic || targetRb->isStatic) {
+		return;
+	}
+	float f = targetRb->mass * powf(XMVectorGetZ(targetRb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(targetCollider->GetCenter()), XMVectorGetY(targetCollider->GetCenter())));
+	XMVECTOR force = XMVector2Normalize(thisCollider->GetCenter() - hitpoint) * f;
+	float f2 = rb->mass * powf(XMVectorGetZ(rb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(thisCollider->GetCenter()), XMVectorGetY(thisCollider->GetCenter())));
+	XMVECTOR force2 = XMVector2Normalize(targetCollider->GetCenter() - hitpoint) * f;
+	force = XMVectorSetZ(force, 0);
+	force2 = XMVectorSetZ(force2, 0);
+	targetRb->AddForceAtPoint(rb->velocity - force, hitpoint);
+	rb->AddForceAtPoint(targetRb->velocity - force, hitpoint);
 }
 
 void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, CircleCollider *thisCollider, CircleCollider *targetCollider, XMVECTOR hitpoint)
@@ -1124,5 +1166,25 @@ void Physics::HandleCollisionForRigidbody(Rigidbody *rb, Rigidbody* targetRb, Ci
 		hit1.hitPoint = hitpoint;
 	}
 	XMVECTOR delta = hit1.hitPoint - hitpoint;
-	thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	if (!rb->isStatic && !rb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+	}
+	if (!targetRb->isStatic && !targetRb->isLockPosition) {
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isLockPosition && targetRb->isLockPosition) {
+		thisCollider->SetCenter(thisCollider->GetCenter() - delta);
+		targetCollider->SetCenter(targetCollider->GetCenter() + delta);
+	}
+	if (rb->isStatic || targetRb->isStatic) {
+		return;
+	}
+	float f = targetRb->mass * powf(XMVectorGetZ(targetRb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(targetCollider->GetCenter()), XMVectorGetY(targetCollider->GetCenter())));
+	XMVECTOR force = XMVector2Normalize(thisCollider->GetCenter() - hitpoint) * f;
+	float f2 = rb->mass * powf(XMVectorGetZ(rb->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(hitpoint), XMVectorGetY(hitpoint), XMVectorGetX(thisCollider->GetCenter()), XMVectorGetY(thisCollider->GetCenter())));
+	XMVECTOR force2 = XMVector2Normalize(targetCollider->GetCenter() - hitpoint) * f;
+	force = XMVectorSetZ(force, 0);
+	force2 = XMVectorSetZ(force2, 0);
+	targetRb->AddForceAtPoint(rb->velocity - force, hitpoint);
+	rb->AddForceAtPoint(targetRb->velocity - force, hitpoint);
 }
