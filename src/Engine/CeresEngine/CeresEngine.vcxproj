@@ -149,6 +149,7 @@
     <ClInclude Include="Physics\Ray.h" />
     <ClInclude Include="Physics\Rigidbody.h" />
     <ClInclude Include="Rendering\Camera.h" />
+    <ClInclude Include="Rendering\d3dUtil.h" />
     <ClInclude Include="Rendering\Geometry.h" />
     <ClInclude Include="Rendering\Light.h" />
     <ClInclude Include="Rendering\SimpleShader.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="Physics\Ray.cpp" />
     <ClCompile Include="Physics\Rigidbody.cpp" />
     <ClCompile Include="Rendering\Camera.cpp" />
+    <ClCompile Include="Rendering\d3dUtil.cpp" />
     <ClCompile Include="Rendering\Geometry.cpp" />
     <ClCompile Include="Rendering\Light.cpp" />
     <ClCompile Include="Rendering\SimpleShader.cpp" />

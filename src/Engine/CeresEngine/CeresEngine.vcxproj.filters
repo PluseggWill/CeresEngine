@@ -90,6 +90,9 @@
     <ClInclude Include="Memory\PoolAllocator.hpp">
       <Filter>Header Files\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\d3dUtil.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Rendering\Shader\PixelShader.hlsl">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="Physics\Rigidbody.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\d3dUtil.cpp">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
