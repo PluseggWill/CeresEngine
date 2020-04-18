@@ -1,2 +1,35 @@
-﻿  Game.cpp
+﻿  Collider.cpp
+  Game.cpp
+  GameComponent.cpp
+  GameObject.cpp
+  Main.cpp
+  PhysicsGeneralMethods.cpp
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(295,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(296,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(320,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(330,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(374,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(375,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(402,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(414,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(462,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(463,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(527,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(539,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1065,81): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1067,70): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1106,81): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1108,70): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1144,81): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1146,70): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1182,81): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+  Ray.cpp
+  SimpleShader.cpp
+  Rigidbody.cpp
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(1184,70): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+  Transform.cpp
+  Generating Code...
+I:\Documents\CeresEngine\src\Engine\CeresEngine\Rigidbody.cpp(47,177): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+I:\Documents\CeresEngine\src\Engine\CeresEngine\PhysicsGeneralMethods.cpp(566): warning C4700:  uninitialized local variable 'u1' used
+  LINK : I:\Documents\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe not found or not built by the last incremental link; performing full link
   CeresEngine.vcxproj -> I:\Documents\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe
