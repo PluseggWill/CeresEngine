@@ -20,7 +20,7 @@ public:
 	void OnResize();
 	void Update(float deltaTime, float totalTime);
 	void Draw(float deltaTime, float totalTime);
-	HRESULT LoadTexture(std::string filename);
+	//HRESULT LoadTexture(std::string filename);
 
 	// Overridden mouse input helper methods
 	void OnMouseDown (WPARAM buttonState, int x, int y);
