@@ -12,8 +12,8 @@
 using namespace DirectX;
 using namespace Physics;
 
-BoxCollider* bc = new BoxCollider(0.3f, 0.3f);
-BoxCollider* bc2 = new BoxCollider(0.4f, 2);
+CircleCollider* bc = new CircleCollider(0.3f);
+CircleCollider* bc2 = new CircleCollider(1);
 CircleCollider* cc = new CircleCollider(1);
 CircleCollider* cc2 = new CircleCollider(1);
 
@@ -87,14 +87,14 @@ void Game::Init()
 
 	bc->SetCenter(2, 0);
 	bc2->SetCenter(0, 0);
-	bc2->SetOffset(0, 0.8f);
+	//bc2->SetOffset(0, 0.8f);
 	cc->SetCenter(1.51f, 0); 
 	cc2->SetCenter(2.1f, 0);
 	rb->mass = 1;
 	rb->isLockRotation = true;
 	rb2->mass = 3;
-	rb2->isLockPosition = true;
-	rb2->AddAngularForce(XMVectorSet(0, 0, 40, 0));
+	rb2->isStatic = true;
+	//rb2->AddAngularForce(XMVectorSet(0, 0, 40, 0));
 	//bc2->SetRotateMatrix(XMMatrixMultiply(bc2->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, 45 * M_PI / 180))));
 	
 	/*XMFLOAT2 p1, p2, p3, p4;
@@ -388,8 +388,7 @@ void Game::Update(float deltaTime, float totalTime)
 	rb2->Update(deltaTime, bc2);
 
 	XMVECTOR point;
-	bool isOverlapping = IsOverlapping(*bc, *bc2, point);
-	//printf("%f,%f\n", XMVectorGetX(point), XMVectorGetY(point));
+	bool isOverlapping = IsOverlapping(*bc2, *bc, point);
 	if (!lastOverlapping && isOverlapping) {
 		isChangingColor = true;
 		printf("\nOnCollisionEnter\n");
@@ -399,6 +398,7 @@ void Game::Update(float deltaTime, float totalTime)
 		printf("\nOnCollisionExit\n");
 	}
 	if (isOverlapping) {
+		//printf("%f,%f\n", XMVectorGetX(point), XMVectorGetY(point));
 		HandleCollisionForRigidbody(rb, rb2, bc, bc2, point);
 		/*float f = rb2->mass * powf(XMVectorGetZ(rb2->angularVelocity) * M_PI / 180, 2) * (PointToPointDistance(XMVectorGetX(point), XMVectorGetY(point), XMVectorGetX(bc2->GetCenter()), XMVectorGetY(bc2->GetCenter())));
 		XMVECTOR force = XMVector2Normalize(bc->GetCenter() - point) * f;
@@ -463,14 +463,14 @@ void Game::Draw(float deltaTime, float totalTime)
 	context->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	XMVECTOR points1[4], points2[4];
-	points1[0] = XMVectorSet(XMVectorGetX(bc->GetCenter()) + XMVectorGetX(bc->GetSize()) / 2, XMVectorGetY(bc->GetCenter()) + XMVectorGetY(bc->GetSize()) / 2, 0, 0);
-	points1[1] = XMVectorSet(XMVectorGetX(bc->GetCenter()) + XMVectorGetX(bc->GetSize()) / 2, XMVectorGetY(bc->GetCenter()) - XMVectorGetY(bc->GetSize()) / 2, 0, 0);
-	points1[2] = XMVectorSet(XMVectorGetX(bc->GetCenter()) - XMVectorGetX(bc->GetSize()) / 2, XMVectorGetY(bc->GetCenter()) - XMVectorGetY(bc->GetSize()) / 2, 0, 0);
-	points1[3] = XMVectorSet(XMVectorGetX(bc->GetCenter()) - XMVectorGetX(bc->GetSize()) / 2, XMVectorGetY(bc->GetCenter()) + XMVectorGetY(bc->GetSize()) / 2, 0, 0);
-	points2[0] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) + XMVectorGetX(bc2->GetSize()) / 2, XMVectorGetY(bc2->GetCenter()) + XMVectorGetY(bc2->GetSize()) / 2, 0, 0);
-	points2[1] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) + XMVectorGetX(bc2->GetSize()) / 2, XMVectorGetY(bc2->GetCenter()) - XMVectorGetY(bc2->GetSize()) / 2, 0, 0);
-	points2[2] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) - XMVectorGetX(bc2->GetSize()) / 2, XMVectorGetY(bc2->GetCenter()) - XMVectorGetY(bc2->GetSize()) / 2, 0, 0);
-	points2[3] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) - XMVectorGetX(bc2->GetSize()) / 2, XMVectorGetY(bc2->GetCenter()) + XMVectorGetY(bc2->GetSize()) / 2, 0, 0);
+	points1[0] = XMVectorSet(XMVectorGetX(bc->GetCenter()) + bc->GetRadius(), XMVectorGetY(bc->GetCenter()) + bc->GetRadius(), 0, 0);
+	points1[1] = XMVectorSet(XMVectorGetX(bc->GetCenter()) + bc->GetRadius(), XMVectorGetY(bc->GetCenter()) - bc->GetRadius(), 0, 0);
+	points1[2] = XMVectorSet(XMVectorGetX(bc->GetCenter()) - bc->GetRadius(), XMVectorGetY(bc->GetCenter()) - bc->GetRadius(), 0, 0);
+	points1[3] = XMVectorSet(XMVectorGetX(bc->GetCenter()) - bc->GetRadius(), XMVectorGetY(bc->GetCenter()) + bc->GetRadius(), 0, 0);
+	points2[0] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) + bc2->GetRadius(), XMVectorGetY(bc2->GetCenter()) + bc2->GetRadius(), 0, 0);
+	points2[1] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) + bc2->GetRadius(), XMVectorGetY(bc2->GetCenter()) - bc2->GetRadius(), 0, 0);
+	points2[2] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) - bc2->GetRadius(), XMVectorGetY(bc2->GetCenter()) - bc2->GetRadius(), 0, 0);
+	points2[3] = XMVectorSet(XMVectorGetX(bc2->GetCenter()) - bc2->GetRadius(), XMVectorGetY(bc2->GetCenter()) + bc2->GetRadius(), 0, 0);
 
 
 	/*bc->SetRotateMatrix(XMMatrixMultiply(bc->GetRotateMatrix(), XMMatrixTranspose(XMMatrixRotationRollPitchYaw(0, 0, deltaTime * XMVectorGetZ(rb->angularVelocity) * M_PI / 180))));
