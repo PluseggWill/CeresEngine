@@ -2,7 +2,7 @@
 
 
 #include <DirectXMath.h>
-#include "GameComponent.h"
+#include "../Core/GameComponent.h"
 #include "Collider.h"
 
 using namespace DirectX;

@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-#include "GameComponent.h"
+#include "../Core/GameComponent.h"
 
 using namespace DirectX;
 class Collider : public GameComponent

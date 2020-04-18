@@ -2,10 +2,10 @@
 
 #include <DirectXMath.h>
 #include <vector>
-#include "GameComponent.h"
+#include "../Core/GameComponent.h"
 #include "Collider.h"
 #include "Rigidbody.h"
-#include "GameObject.h"
+#include "..//Core/GameObject.h"
 #include "Ray.h"
 
 namespace Physics {
