@@ -1,6 +1,12 @@
-﻿  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
+﻿D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Rendering\Shader\VertexShader.hlsl(87,18-53): warning X3206: 'mul': implicit truncation of vector type
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Rendering\Shader\VertexShader.hlsl(87,2-53): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\VertexShader.cso
   Game.cpp
-D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(157,11): warning C4101:  'temp': unreferenced local variable
-Main.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Main.obj' or at 'D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\vc142.pdb'; linking object as if no debug info
-DXCore.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'DXCore.obj' or at 'D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\vc142.pdb'; linking object as if no debug info
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(180,59): warning C4267:  '=': conversion from 'size_t' to 'UINT', possible loss of data
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(204,55): warning C4267:  '=': conversion from 'size_t' to 'UINT', possible loss of data
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(169,28): warning C4101:  'mDiffuseMapSRV': unreferenced local variable
+  Main.cpp
+  Generating Code...
+D:\Code\Engine\CeresEngine\src\Engine\CeresEngine\Core\Game.cpp(307,4): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
   CeresEngine.vcxproj -> D:\Code\Engine\CeresEngine\src\Engine\x64\Debug\CeresEngine.exe

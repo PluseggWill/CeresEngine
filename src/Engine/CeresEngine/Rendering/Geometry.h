@@ -7,13 +7,13 @@ public:
 	///<summary>
 	/// Creates a box centered at the origin with the given dimensions.
 	///</summary>
-	void CreateBox(float width, float height, float depth, MeshData& meshData);
+	void CreateBox(float width, float height, float depth, XMFLOAT4 color, MeshData& meshData);
 
 	///<summary>
 	/// Creates a sphere centered at the origin with the given radius.  The
 	/// slices and stacks parameters control the degree of tessellation.
 	///</summary>
-	void CreateSphere(float radius, UINT sliceCount, UINT stackCount, MeshData& meshData);
+	void CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFLOAT4 color, MeshData& meshData);
 
 	///<summary>
 	/// Creates a geosphere centered at the origin with the given radius.  The
@@ -39,5 +39,6 @@ public:
 	/// postprocessing effects.
 	///</summary>
 	//void CreateFullscreenQuad(MeshData& meshData);
+
 };
 

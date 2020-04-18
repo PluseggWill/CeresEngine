@@ -5,11 +5,20 @@
 // - All non-pipeline variables that get their values from 
 //    our C++ code must be defined inside a Constant Buffer
 // - The name of the cbuffer itself is unimportant
-cbuffer externalData : register(b0)
+cbuffer cbPerObject : register(b0)
 {
 	matrix world;
+	matrix worldInvTranspose;
 	matrix view;
 	matrix projection;
+};
+
+Texture2D gDiffuseMap;
+
+SamplerState samAnisotropic
+{
+	Filter = ANISOTROPIC;
+	MaxAnisotropy = 4;
 };
 
 // Struct representing a single vertex worth of data
@@ -25,7 +34,7 @@ struct VertexShaderInput
 	//  |    |                |
 	//  v    v                v
 	float3 position		: POSITION;     // XYZ position
-	// float4 color		: COLOR;        // RGBA color
+	float4 color		: COLOR;        // RGBA color
 	float3 normal		: NORMAL;		// Normal direction
 	float3 tangentU		: TANGENT;		// Tangent
 	float2 texU			: TEXCOORD0;	// Texture coordinate
@@ -45,6 +54,7 @@ struct VertexToPixel
 	//  v    v                v
 	float4 position		: SV_POSITION;	// XYZW position (System Value Position)
 	float4 color		: COLOR;        // RGBA color
+	float3 normal		: NORMAL;
 };
 
 // --------------------------------------------------------
@@ -74,12 +84,14 @@ VertexToPixel main( VertexShaderInput input )
 	// The result is essentially the position (XY) of the vertex on our 2D 
 	// screen and the distance (Z) from the camera (the "depth" of the pixel)
 	output.position = mul(float4(input.position, 1.0f), worldViewProj);
+	output.normal = mul(input.normal, worldInvTranspose);
 
 	// Pass the color through 
 	// - The values will be interpolated per-pixel by the rasterizer
 	// - We don't need to alter it here, but we do need to send it to the pixel shader
 	//output.color = input.color;
-	output.color = float4(1.0f, 0.0f, 0.0f, 1.0f);
+	output.color = input.color;
+	//output.color = gDiffuseMap.Sample(samAnisotropic, input.texU);
 
 	// Whatever we return will make its way through the pipeline to the
 	// next programmable stage we're using (the pixel shader for now)

@@ -3,6 +3,8 @@
 #include "DXCore.h"
 #include "../Rendering/SimpleShader.h"
 #include <DirectXMath.h>
+#include "..//Rendering/Vertex.h"
+#include <D3DX11tex.h>
 
 class Game 
 	: public DXCore
@@ -18,6 +20,7 @@ public:
 	void OnResize();
 	void Update(float deltaTime, float totalTime);
 	void Draw(float deltaTime, float totalTime);
+	HRESULT LoadTexture(std::string filename);
 
 	// Overridden mouse input helper methods
 	void OnMouseDown (WPARAM buttonState, int x, int y);
@@ -25,6 +28,7 @@ public:
 	void OnMouseMove (WPARAM buttonState, int x, int y);
 	void OnMouseWheel(float wheelDelta,   int x, int y);
 private:
+	MeshData meshData;
 
 	// Initialization helper methods - feel free to customize, combine, etc.
 	void LoadShaders(); 

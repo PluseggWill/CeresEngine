@@ -138,9 +138,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Core\DXCore.h" />
     <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="Rendering\Camera.h" />
     <ClInclude Include="Rendering\Geometry.h" />
     <ClInclude Include="Rendering\Light.h" />
     <ClInclude Include="Rendering\SimpleShader.h" />
@@ -162,14 +162,17 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Core\DXCore.cpp" />
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Rendering\Camera.cpp" />
     <ClCompile Include="Rendering\Geometry.cpp" />
     <ClCompile Include="Rendering\Light.cpp" />
     <ClCompile Include="Rendering\SimpleShader.cpp" />
     <ClCompile Include="Rendering\Texture.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\WoodCrate02.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

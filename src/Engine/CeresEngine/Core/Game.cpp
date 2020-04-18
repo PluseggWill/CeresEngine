@@ -139,23 +139,20 @@ void Game::CreateBasicGeometry()
 {
 	// Create some temporary variables to represent colors
 	// - Not necessary, just makes things more readable
-	/*XMFLOAT4 red = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
+	XMFLOAT4 red = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
 	XMFLOAT4 green = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
-	XMFLOAT4 blue = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);*/
+	XMFLOAT4 blue = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
 
+#pragma region Origin
 	// Set up the vertices of the triangle we would like to draw
 	// - We're going to copy this array, exactly as it exists in memory
 	//    over to a DirectX-controlled data structure (the vertex buffer)
 	Vertex vertices[] =
 	{
-		{ XMFLOAT3(+0.0f, +1.0f, +0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(+1.5f, -1.0f, +0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(-1.5f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(+0.0f, +1.0f, +0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), red, XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(+1.5f, -1.0f, +0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), green, XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(-1.5f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), blue, XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(0.0f, 0.0f) },
 	};
-
-	MeshData meshData;
-	Geometry temp;
-	//temp.CreateBox(10.0f, 10.0f, 10.0f, meshData);
 
 	// Set up the indices, which tell us which vertices to use and in which order
 	// - This is somewhat redundant for just 3 vertices (it's a simple example)
@@ -163,14 +160,24 @@ void Game::CreateBasicGeometry()
 	//    in the correct order and each one will be used exactly once
 	// - But just to see how it's done...
 	int indices[] = { 0, 1, 2 };
+#pragma endregion
 
+#pragma region TestCode
+	// Test code :
+	Geometry temp;
+	temp.CreateBox(2.0f, 2.0f, 2.0f, red, meshData);
+	ID3D11ShaderResourceView* mDiffuseMapSRV;
+	
+	//temp.CreateSphere(1.0f, 10, 100, blue, meshData);
+#pragma endregion
 
 	// Create the VERTEX BUFFER description -----------------------------------
 	// - The description is created on the stack because we only need
 	//    it to create the buffer.  The description is then useless.
 	D3D11_BUFFER_DESC vbd;
 	vbd.Usage = D3D11_USAGE_IMMUTABLE;
-	vbd.ByteWidth = sizeof(Vertex) * 3;       // 3 = number of vertices in the buffer
+	// vbd.ByteWidth = sizeof(Vertex) * 3;       // 3 = number of vertices in the buffer
+	vbd.ByteWidth = sizeof(Vertex) * meshData.Vertices.size();
 	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER; // Tells DirectX this is a vertex buffer
 	vbd.CPUAccessFlags = 0;
 	vbd.MiscFlags = 0;
@@ -179,7 +186,8 @@ void Game::CreateBasicGeometry()
 	// Create the proper struct to hold the initial vertex data
 	// - This is how we put the initial data into the buffer
 	D3D11_SUBRESOURCE_DATA initialVertexData;
-	initialVertexData.pSysMem = vertices;
+	//initialVertexData.pSysMem = vertices;
+	initialVertexData.pSysMem = meshData.Vertices.data();
 
 	// Actually create the buffer with the initial data
 	// - Once we do this, we'll NEVER CHANGE THE BUFFER AGAIN
@@ -192,7 +200,8 @@ void Game::CreateBasicGeometry()
 	//    it to create the buffer.  The description is then useless.
 	D3D11_BUFFER_DESC ibd;
 	ibd.Usage = D3D11_USAGE_IMMUTABLE;
-	ibd.ByteWidth = sizeof(int) * 3;         // 3 = number of indices in the buffer
+	// ibd.ByteWidth = sizeof(int) * 3;         // 3 = number of indices in the buffer
+	ibd.ByteWidth = sizeof(int) * meshData.Indices.size();
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER; // Tells DirectX this is an index buffer
 	ibd.CPUAccessFlags = 0;
 	ibd.MiscFlags = 0;
@@ -201,13 +210,13 @@ void Game::CreateBasicGeometry()
 	// Create the proper struct to hold the initial index data
 	// - This is how we put the initial data into the buffer
 	D3D11_SUBRESOURCE_DATA initialIndexData;
-	initialIndexData.pSysMem = indices;
+	// initialIndexData.pSysMem = indices;
+	initialIndexData.pSysMem = meshData.Indices.data();
 
 	// Actually create the buffer with the initial data
 	// - Once we do this, we'll NEVER CHANGE THE BUFFER AGAIN
 	device->CreateBuffer(&ibd, &initialIndexData, &indexBuffer);
 }
-
 
 // --------------------------------------------------------
 // Handle resizing DirectX "stuff" to match the new window size.
@@ -232,9 +241,12 @@ void Game::OnResize()
 // --------------------------------------------------------
 void Game::Update(float deltaTime, float totalTime)
 {
+	//printf("Update");
 	// Quit if the escape key is pressed
 	if (GetAsyncKeyState(VK_ESCAPE))
 		Quit();
+	if (GetAsyncKeyState(VK_UP))
+		printf("UP");
 }
 
 // --------------------------------------------------------
@@ -290,7 +302,7 @@ void Game::Draw(float deltaTime, float totalTime)
 	//  - DrawIndexed() uses the currently set INDEX BUFFER to look up corresponding
 	//     vertices in the currently set VERTEX BUFFER
 	context->DrawIndexed(
-		3,     // The number of indices to use (we could draw a subset if we wanted)
+		meshData.Vertices.size(),     // The number of indices to use (we could draw a subset if we wanted)
 		0,     // Offset to the first index we want to use
 		0);    // Offset to add to each index when looking up vertices
 
