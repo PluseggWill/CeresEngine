@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Memory">
       <UniqueIdentifier>{42d4b29d-08ea-4912-a6b5-57596486b9a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{a322c5b2-f9d2-434b-9912-9c29021454bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{d8d8732a-be5b-4e9c-9e7f-184f380a1952}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\SimpleShader.h">
@@ -92,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="Rendering\d3dUtil.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\CXBOXController.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="Rendering\d3dUtil.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\CXBOXController.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

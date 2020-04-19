@@ -143,6 +143,7 @@
     <ClInclude Include="Core\GameComponent.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\Transform.h" />
+    <ClInclude Include="Input\CXBOXController.h" />
     <ClInclude Include="Memory\PoolAllocator.hpp" />
     <ClInclude Include="Physics\Collider.h" />
     <ClInclude Include="Physics\PhysicsGeneralMethods.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Core\GameComponent.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\Transform.cpp" />
+    <ClCompile Include="Input\CXBOXController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Physics\Collider.cpp" />
     <ClCompile Include="Physics\PhysicsGeneralMethods.cpp" />

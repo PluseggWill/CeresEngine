@@ -33,7 +33,7 @@ private:
 	// Initialization helper methods - feel free to customize, combine, etc.
 	void LoadShaders(); 
 	void CreateMatrices();
-	void CreateBasicGeometry();
+	void CreateGeometry();
 
 	// Buffers to hold actual geometry data
 	ID3D11Buffer* vertexBuffer;

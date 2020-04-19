@@ -9,6 +9,7 @@ Camera::Camera()
 	  mLook(0.0f, 0.0f, 1.0f)
 {
 	SetLens(0.25f * M_PI, 1.0f, 1.0f, 1000.0f);
+	UpdateViewMatrix();
 }
 
 Camera::~Camera()

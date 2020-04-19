@@ -64,7 +64,7 @@ void Game::Init()
 	//  - You'll be expanding and/or replacing these later
 	LoadShaders();
 	CreateMatrices();
-	CreateBasicGeometry();
+	CreateGeometry();
 
 	// Tell the input assembler stage of the pipeline what kind of
 	// geometric primitives (points, lines or triangles) we want to draw.  
@@ -135,7 +135,7 @@ void Game::CreateMatrices()
 // --------------------------------------------------------
 // Creates the geometry we're going to draw - a single triangle for now
 // --------------------------------------------------------
-void Game::CreateBasicGeometry()
+void Game::CreateGeometry()
 {
 	// Create some temporary variables to represent colors
 	// - Not necessary, just makes things more readable
@@ -166,7 +166,7 @@ void Game::CreateBasicGeometry()
 	// Test code :
 	Geometry temp;
 	temp.CreateBox(2.0f, 2.0f, 2.0f, red, meshData);
-	ID3D11ShaderResourceView* mDiffuseMapSRV;
+	
 	
 	//temp.CreateSphere(1.0f, 10, 100, blue, meshData);
 #pragma endregion
