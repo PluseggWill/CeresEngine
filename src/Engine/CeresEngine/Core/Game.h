@@ -5,6 +5,11 @@
 #include <DirectXMath.h>
 #include "..//Rendering/Vertex.h"
 #include <D3DX11tex.h>
+#include <vector>
+#include "Scene.h"
+#include "..//Rendering/Camera.h"
+#include "..//Rendering/MeshData.h"
+#include "..//Rendering/Light.h"
 
 class Game 
 	: public DXCore
@@ -20,7 +25,6 @@ public:
 	void OnResize();
 	void Update(float deltaTime, float totalTime);
 	void Draw(float deltaTime, float totalTime);
-	HRESULT LoadTexture(std::string filename);
 
 	// Overridden mouse input helper methods
 	void OnMouseDown (WPARAM buttonState, int x, int y);
@@ -28,12 +32,19 @@ public:
 	void OnMouseMove (WPARAM buttonState, int x, int y);
 	void OnMouseWheel(float wheelDelta,   int x, int y);
 private:
-	MeshData meshData;
+	// Scenes to be loaded
+	Scene* currentScene;
+	//UINT currentScene;
+	MeshData tempMeshData;
 
-	// Initialization helper methods - feel free to customize, combine, etc.
-	void LoadShaders(); 
-	void CreateMatrices();
-	void CreateGeometry();
+	// Current camera
+	Camera* currentCamera;
+	// Directional light
+	DirectionalLight dirLight;
+	Material mat;
+	// Texture
+	ID3D11ShaderResourceView* texture;
+	ID3D11SamplerState* texSamplerState;
 
 	// Buffers to hold actual geometry data
 	ID3D11Buffer* vertexBuffer;
@@ -51,5 +62,18 @@ private:
 	// Keeps track of the old mouse position.  Useful for 
 	// determining how far the mouse moved in a single frame.
 	POINT prevMousePos;
+
+public:
+	// Initialization helper methods - feel free to customize, combine, etc.
+	void LoadShaders();
+	void CreateMatricesManually();
+	void CreateGeometry();
+	
+	void InitCamera();
+	void UpdateCamera();
+	void SetLight();
+	void InitTexture();
+	void LoadScene(UINT numOfScene);
+	void AddScene(Scene scene);
 };
 

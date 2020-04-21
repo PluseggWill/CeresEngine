@@ -10,17 +10,17 @@ public:
 
 	// Get/Set world camera position.
 	XMVECTOR GetPositionXM() const;
-	XMFLOAT3 GetPosition() const;
+	XMFLOAT4 GetPosition() const;
 	void SetPosition(float x, float y, float z);
-	void SetPosition(const XMFLOAT3& v);
+	void SetPosition(const XMFLOAT4& v);
 
 	// Get camera basis vectors.
 	XMVECTOR GetRightXM() const;
-	XMFLOAT3 GetRight() const;
+	XMFLOAT4 GetRight() const;
 	XMVECTOR GetUpXM() const;
-	XMFLOAT3 GetUp() const;
+	XMFLOAT4 GetUp() const;
 	XMVECTOR GetLookXM() const;
-	XMFLOAT3 GetLook() const;
+	XMFLOAT4 GetLook() const;
 
 	// Get frustum properties.
 	float GetNearZ() const;
@@ -39,8 +39,8 @@ public:
 	void SetLens(float fovY, float aspect, float zn, float zf);
 
 	// Define Camera space via LookAt parameters.
-	void LookAt(FXMVECTOR pos, FXMVECTOR target, FXMVECTOR worldUp);
-	void LookAt(const XMFLOAT3& pos, const XMFLOAT3& target, const XMFLOAT3& up);
+	void LookAt(FXMVECTOR pos, FXMVECTOR dir, FXMVECTOR worldUp);
+	void LookAt(const XMFLOAT4& pos, const XMFLOAT4& dir, const XMFLOAT4& up);
 
 	// Get View/Proj matrices.
 	XMMATRIX View() const;
@@ -60,10 +60,10 @@ public:
 	void UpdateViewMatrix();
 
 private:
-	XMFLOAT3 mPosition; // view space origin
-	XMFLOAT3 mRight; // view space x-axis
-	XMFLOAT3 mUp; // view space y-axis
-	XMFLOAT3 mLook; // view space z-axis
+	XMFLOAT4 mPosition; // view space origin
+	XMFLOAT4 mRight; // view space x-axis
+	XMFLOAT4 mUp; // view space y-axis
+	XMFLOAT4 mLook; // view space z-axis
 
 	// Cache frustum properties.
 	float mNearZ;

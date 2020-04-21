@@ -1,63 +1,28 @@
-
-#ifndef LIGHT
-#define LIGHT
+#pragma once
+#ifndef _LIGHT_H
+#define _LIGHT_H
 
 #include <Windows.h>
-#include <xnamath.h>
+#include <DirectXMath.h>
 
 struct DirectionalLight
 {
 	DirectionalLight() { ZeroMemory(this, sizeof(this)); }
 
-	XMFLOAT4 Ambient;
-	XMFLOAT4 Diffuse;
-	XMFLOAT4 Specular;
-	XMFLOAT3 Direction;
-	float Pad; 
-};
-
-struct PointLight
-{
-	PointLight() { ZeroMemory(this, sizeof(this)); }
-
-	XMFLOAT4 Ambient;
-	XMFLOAT4 Diffuse;
-	XMFLOAT4 Specular;
-
-	XMFLOAT3 Position;
-	float Range;
-
-	XMFLOAT3 Att;
-	float Pad; 
-};
-
-struct SpotLight
-{
-	SpotLight() { ZeroMemory(this, sizeof(this)); }
-
-	XMFLOAT4 Ambient;
-	XMFLOAT4 Diffuse;
-	XMFLOAT4 Specular;
-
-	XMFLOAT3 Position;
-	float Range;
-
-	XMFLOAT3 Direction;
-	float Spot;
-
-	// Packed into 4D vector: (Att, Pad)
-	XMFLOAT3 Att;
-	float Pad; 
+	DirectX::XMFLOAT4 ambient;
+	DirectX::XMFLOAT4 diffuse;
+	DirectX::XMFLOAT4 specular;
+	DirectX::XMFLOAT3 direction;
 };
 
 struct Material
 {
 	Material() { ZeroMemory(this, sizeof(this)); }
 
-	XMFLOAT4 Ambient;
-	XMFLOAT4 Diffuse;
-	XMFLOAT4 Specular; // w = SpecPower
-	XMFLOAT4 Reflect;
+	DirectX::XMFLOAT4 ambient;
+	DirectX::XMFLOAT4 diffuse;
+	DirectX::XMFLOAT4 specular; // w = SpecPower
+	DirectX::XMFLOAT4 reflect;
 };
 
 #endif 

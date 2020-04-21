@@ -34,17 +34,3 @@ struct Vertex
 	XMFLOAT2 TexC;			// The texture of the vertex
 };
 
-struct MeshData
-{
-	std::vector<Vertex> Vertices;
-	std::vector<UINT> Indices;
-};
-
-struct GameObject
-{
-	XMFLOAT3 position;
-	XMFLOAT3 rotation;
-	XMFLOAT3 scale;
-};
-
-

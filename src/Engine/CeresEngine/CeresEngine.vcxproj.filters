@@ -28,18 +28,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{b9f40e6c-09c9-46b0-8fe7-ea8bdb0ab5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Physics">
-      <UniqueIdentifier>{aa46e3c6-9104-4dc8-bfe9-a39f84881e41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Physics">
-      <UniqueIdentifier>{05087645-8870-4e51-9169-84eefd332475}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Memory">
-      <UniqueIdentifier>{ecb80e3d-74c4-4e1e-bf91-8abefdb06a4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Memory">
-      <UniqueIdentifier>{42d4b29d-08ea-4912-a6b5-57596486b9a6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Input">
       <UniqueIdentifier>{a322c5b2-f9d2-434b-9912-9c29021454bd}</UniqueIdentifier>
     </Filter>
@@ -81,26 +69,17 @@
     <ClInclude Include="Core\Transform.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\Collider.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\PhysicsGeneralMethods.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\Ray.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\Rigidbody.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory\PoolAllocator.hpp">
-      <Filter>Header Files\Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Rendering\d3dUtil.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Input\CXBOXController.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Scene.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\MeshData.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,23 +124,17 @@
     <ClCompile Include="Core\GameComponent.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\Collider.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\PhysicsGeneralMethods.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\Ray.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\Rigidbody.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\d3dUtil.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Input\CXBOXController.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scene.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\MeshData.cpp">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

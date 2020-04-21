@@ -48,7 +48,7 @@ void Geometry::CreateBox(float width, float height, float depth, XMFLOAT4 color,
 	v[22] = Vertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
 	v[23] = Vertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 
-	meshData.Vertices.assign(&v[0], &v[24]);
+	meshData.mVertices.assign(&v[0], &v[24]);
 
 	// Create the indices
 
@@ -78,13 +78,14 @@ void Geometry::CreateBox(float width, float height, float depth, XMFLOAT4 color,
 	i[30] = 20; i[31] = 21; i[32] = 22;
 	i[33] = 20; i[34] = 22; i[35] = 23;
 
-	meshData.Indices.assign(&i[0], &i[36]);
+	meshData.mIndices.assign(&i[0], &i[36]);
+	meshData.AddNumTriangles(12);
 }
 
 void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFLOAT4 color, MeshData& meshData)
 {
-	meshData.Vertices.clear();
-	meshData.Indices.clear();
+	meshData.mVertices.clear();
+	meshData.mIndices.clear();
 
 	//
 	// Compute the vertices stating at the top pole and moving down the stacks.
@@ -96,7 +97,7 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 	Vertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	Vertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 
-	meshData.Vertices.push_back( topVertex );
+	meshData.mVertices.push_back( topVertex );
 
 	float phiStep   = XM_PI/stackCount;
 	float thetaStep = 2.0f*XM_PI/sliceCount;
@@ -132,11 +133,11 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 			v.TexC.x = theta / XM_2PI;
 			v.TexC.y = phi / XM_PI;
 
-			meshData.Vertices.push_back( v );
+			meshData.mVertices.push_back( v );
 		}
 	}
 
-	meshData.Vertices.push_back( bottomVertex );
+	meshData.mVertices.push_back( bottomVertex );
 
 	//
 	// Compute indices for top stack.  The top stack was written first to the vertex buffer
@@ -145,9 +146,9 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 
 	for(UINT i = 1; i <= sliceCount; ++i)
 	{
-		meshData.Indices.push_back(0);
-		meshData.Indices.push_back(i+1);
-		meshData.Indices.push_back(i);
+		meshData.mIndices.push_back(0);
+		meshData.mIndices.push_back(i+1);
+		meshData.mIndices.push_back(i);
 	}
 	
 	//
@@ -162,13 +163,13 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 	{
 		for(UINT j = 0; j < sliceCount; ++j)
 		{
-			meshData.Indices.push_back(baseIndex + i*ringVertexCount + j);
-			meshData.Indices.push_back(baseIndex + i*ringVertexCount + j+1);
-			meshData.Indices.push_back(baseIndex + (i+1)*ringVertexCount + j);
+			meshData.mIndices.push_back(baseIndex + i*ringVertexCount + j);
+			meshData.mIndices.push_back(baseIndex + i*ringVertexCount + j+1);
+			meshData.mIndices.push_back(baseIndex + (i+1)*ringVertexCount + j);
 
-			meshData.Indices.push_back(baseIndex + (i+1)*ringVertexCount + j);
-			meshData.Indices.push_back(baseIndex + i*ringVertexCount + j+1);
-			meshData.Indices.push_back(baseIndex + (i+1)*ringVertexCount + j+1);
+			meshData.mIndices.push_back(baseIndex + (i+1)*ringVertexCount + j);
+			meshData.mIndices.push_back(baseIndex + i*ringVertexCount + j+1);
+			meshData.mIndices.push_back(baseIndex + (i+1)*ringVertexCount + j+1);
 		}
 	}
 
@@ -178,15 +179,15 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 	//
 
 	// South pole vertex was added last.
-	UINT southPoleIndex = (UINT)meshData.Vertices.size()-1;
+	UINT southPoleIndex = (UINT)meshData.mVertices.size()-1;
 
 	// Offset the indices to the index of the first vertex in the last ring.
 	baseIndex = southPoleIndex - ringVertexCount;
 	
 	for(UINT i = 0; i < sliceCount; ++i)
 	{
-		meshData.Indices.push_back(southPoleIndex);
-		meshData.Indices.push_back(baseIndex+i);
-		meshData.Indices.push_back(baseIndex+i+1);
+		meshData.mIndices.push_back(southPoleIndex);
+		meshData.mIndices.push_back(baseIndex+i);
+		meshData.mIndices.push_back(baseIndex+i+1);
 	}
 }

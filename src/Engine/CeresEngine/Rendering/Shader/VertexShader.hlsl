@@ -1,4 +1,3 @@
-
 // Constant Buffer
 // - Allows us to define a buffer of individual variables 
 //    which will (eventually) hold data from our C++ code
@@ -8,7 +7,6 @@
 cbuffer cbPerObject : register(b0)
 {
 	matrix world;
-	matrix worldInvTranspose;
 	matrix view;
 	matrix projection;
 };
@@ -52,9 +50,11 @@ struct VertexToPixel
 	//  |   Name          Semantic
 	//  |    |                |
 	//  v    v                v
-	float4 position		: SV_POSITION;	// XYZW position (System Value Position)
+	float4 posH			: SV_POSITION;	// XYZW position (System Value Position)
 	float4 color		: COLOR;        // RGBA color
+	float3 posW			: POSITION;
 	float3 normal		: NORMAL;
+	float2 texU			: TEXCOORD0;
 };
 
 // --------------------------------------------------------
@@ -83,9 +83,10 @@ VertexToPixel main( VertexShaderInput input )
 	//
 	// The result is essentially the position (XY) of the vertex on our 2D 
 	// screen and the distance (Z) from the camera (the "depth" of the pixel)
-	output.position = mul(float4(input.position, 1.0f), worldViewProj);
-	output.normal = mul(input.normal, worldInvTranspose);
-
+	output.posH = mul(float4(input.position, 1.0f), worldViewProj);
+	output.normal = mul(input.normal, world);
+	output.posW = mul(float4(input.position, 1.0f), world).xyz;
+	output.texU = input.texU;
 	// Pass the color through 
 	// - The values will be interpolated per-pixel by the rasterizer
 	// - We don't need to alter it here, but we do need to send it to the pixel shader
