@@ -227,9 +227,10 @@ void Game::CreateGeometry()
 
 #pragma region TestCode
 	// Test code :
-	Geometry::CreateBox(2.0f, 2.0f, 2.0f, red, tempMeshData);
+	//Geometry::CreateBox(2.0f, 2.0f, 2.0f, red, tempMeshData);
+	//Geometry::CreateBox(3.0f, 3.0f, 3.0f, blue, tempMeshData);
 	//tempMeshData.ComputeNormal();
-	
+	Geometry::CreateSphere(2.0f, 100, 100, red, tempMeshData);
 	
 	//temp.CreateSphere(1.0f, 10, 100, blue, meshData);
 #pragma endregion
@@ -262,7 +263,7 @@ void Game::CreateGeometry()
 	D3D11_BUFFER_DESC ibd;
 	ibd.Usage = D3D11_USAGE_IMMUTABLE;
 	// ibd.ByteWidth = sizeof(int) * 3;         // 3 = number of indices in the buffer
-	ibd.ByteWidth = sizeof(int) * tempMeshData.mIndices.size();
+	ibd.ByteWidth = sizeof(UINT) * tempMeshData.mIndices.size();
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER; // Tells DirectX this is an index buffer
 	ibd.CPUAccessFlags = 0;
 	ibd.MiscFlags = 0;
@@ -309,25 +310,25 @@ void Game::Update(float deltaTime, float totalTime)
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
 		currentCamera->Strafe(0.001f);
-		printf("Right");
+		//printf("Right");
 	}
 
 	if (GetAsyncKeyState(VK_LEFT))
 	{
 		currentCamera->Strafe(-0.001f);
-		printf("Left");
+		//printf("Left");
 	}
 
 	if (GetAsyncKeyState(VK_UP))
 	{
 		currentCamera->Walk(0.001f);
-		printf("Forward");
+		//printf("Forward");
 	}
 
 	if (GetAsyncKeyState(VK_DOWN))
 	{
 		currentCamera->Walk(-0.001f);
-		printf("Backward");
+		//printf("Backward");
 	}
 
 	UpdateCamera();
@@ -395,7 +396,7 @@ void Game::Draw(float deltaTime, float totalTime)
 	//  - DrawIndexed() uses the currently set INDEX BUFFER to look up corresponding
 	//     vertices in the currently set VERTEX BUFFER
 	context->DrawIndexed(
-		tempMeshData.mVertices.size(),     // The number of indices to use (we could draw a subset if we wanted)
+		tempMeshData.mIndices.size(),     // The number of indices to use (we could draw a subset if we wanted)
 		0,     // Offset to the first index we want to use
 		0);    // Offset to add to each index when looking up vertices
 

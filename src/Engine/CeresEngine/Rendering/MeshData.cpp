@@ -2,7 +2,7 @@
 
 void MeshData::ComputeNormal()
 {
-	for (UINT i = 0; i < mNumTriangles; ++i)
+	for (UINT i = 0; i < mIndices.size() / 3; ++i)
 	{
 
 		// indices of the ith triangle

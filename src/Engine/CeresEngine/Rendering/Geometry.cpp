@@ -48,6 +48,13 @@ void Geometry::CreateBox(float width, float height, float depth, XMFLOAT4 color,
 	v[22] = Vertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
 	v[23] = Vertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 
+	// Test code
+	/*v[0] = Vertex(+w2, -h2, -d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f);
+	v[1] = Vertex(+w2, +h2, -d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+	v[2] = Vertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+	v[3] = Vertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);*/
+
+
 	meshData.mVertices.assign(&v[0], &v[24]);
 
 	// Create the indices
@@ -91,9 +98,6 @@ void Geometry::CreateSphere(float radius, UINT sliceCount, UINT stackCount, XMFL
 	// Compute the vertices stating at the top pole and moving down the stacks.
 	//
 
-	// Poles: note that there will be texture coordinate distortion as there is
-	// not a unique point on the texture map to assign to the pole when mapping
-	// a rectangular texture onto a sphere.
 	Vertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	Vertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 

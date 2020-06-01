@@ -103,4 +103,5 @@ float4 main(VertexToPixel input) : SV_TARGET
 
 	//return litColor;
 	return testTexture.Sample(samplerState, input.texU);
+	//return input.color;
 }
